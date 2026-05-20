@@ -14,11 +14,6 @@ import streamlit as st
 # PAGE CONFIG
 # ==============================
 
-st.set_page_config(
-    page_title="MCC Expiry Messenger",
-    page_icon="📨",
-    layout="wide",
-)
 
 st.set_page_config(
     page_title="MCC Expiry Messenger",
@@ -94,6 +89,46 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# ==============================
+# FOOTER
+# ==============================
+
+def show_footer():
+    st.markdown(
+        """
+        <style>
+        .custom-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid #E2E8F0;
+            padding: 10px 20px;
+            text-align: center;
+            z-index: 999999;
+            font-size: 14px;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .custom-footer strong {
+            color: #003B73;
+        }
+
+        .main .block-container {
+            padding-bottom: 70px;
+        }
+        </style>
+
+        """,
+        unsafe_allow_html=True,
+    )
+
+show_footer()
+
+
 
 SMTP_HOST = "smtp.office365.com"
 SMTP_PORT = 587
