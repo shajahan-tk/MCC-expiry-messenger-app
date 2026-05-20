@@ -36,11 +36,29 @@ st.markdown(
     #MainMenu {
         visibility: hidden;
     }
-
+    .custom-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #FFFFFF;
+        border-top: 1px solid #E2E8F0;
+        padding: 10px 20px;
+        text-align: center;
+        z-index: 999999;
+        font-size: 14px;
+        color: #475569;
+        font-weight: 500;
+    }
 
     .custom-footer strong {
         color: #003B73;
     }
+
+    .main .block-container {
+        padding-bottom: 60px;
+    }
+
 
     footer {
         visibility: hidden;
@@ -67,6 +85,12 @@ st.markdown(
     }
 
     </style>
+
+        <div class="custom-footer">
+        <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+        &nbsp; | &nbsp;
+        Developed by <strong>Mr. Shajahan Tk</strong>
+    </div>
     """,
     unsafe_allow_html=True
 )
