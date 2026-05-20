@@ -191,7 +191,7 @@ html, body, .stApp {{
 
 [data-testid="stSidebar"] {{
     background-color: {THEME["sidebar_bg"]} !important;
-    border-right: 1px solid {THEME["border"]} !important;
+    border-right: 1px solid #E2E8F0 !important;
 }}
 
 [data-testid="stSidebar"] * {{
@@ -220,91 +220,147 @@ p, label, span, div {{
     margin-top: 6px;
 }}
 
+/* INPUT BOXES */
 input, textarea, select {{
-    background-color: {THEME["input_bg"]} !important;
-    color: {THEME["input_text"]} !important;
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
     border-radius: 10px !important;
-    border: 1px solid {THEME["border"]} !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: none !important;
 }}
 
 input:focus, textarea:focus {{
-    border: 1px solid {THEME["primary"]} !important;
-    box-shadow: 0 0 0 1px {THEME["primary"]} !important;
+    border: 1px solid #003B73 !important;
+    box-shadow: 0 0 0 1px #003B73 !important;
 }}
 
+/* SELECT DROPDOWN MAIN BOX */
 [data-baseweb="select"] > div {{
-    background-color: {THEME["input_bg"]} !important;
-    color: {THEME["input_text"]} !important;
-    border: 1px solid {THEME["border"]} !important;
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+    border: 1px solid #CBD5E1 !important;
     border-radius: 10px !important;
+    box-shadow: none !important;
 }}
 
 [data-baseweb="select"] span {{
-    color: {THEME["input_text"]} !important;
+    color: #111827 !important;
+}}
+
+[data-baseweb="select"] svg {{
+    color: #111827 !important;
+    fill: #111827 !important;
+}}
+
+/* SELECT DROPDOWN MENU */
+div[role="listbox"] {{
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12) !important;
+}}
+
+div[role="option"] {{
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+}}
+
+div[role="option"] * {{
+    color: #111827 !important;
+}}
+
+div[role="option"]:hover {{
+    background-color: #E8F2FF !important;
+    color: #003B73 !important;
+}}
+
+div[role="option"][aria-selected="true"] {{
+    background-color: #DBEAFE !important;
+    color: #003B73 !important;
+}}
+
+/* PASSWORD EYE AREA */
+[data-testid="stTextInput"] button {{
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }}
 
 [data-testid="stTextArea"] textarea {{
     min-height: 170px !important;
 }}
 
+/* FILE UPLOADER */
 [data-testid="stFileUploader"] section {{
-    background-color: {THEME["card_bg"]} !important;
-    border: 1px dashed {THEME["border"]} !important;
+    background-color: #FFFFFF !important;
+    border: 1px dashed #CBD5E1 !important;
     border-radius: 16px !important;
     padding: 1rem !important;
 }}
 
 [data-testid="stFileUploader"] section * {{
-    color: {THEME["text"]} !important;
+    color: #111827 !important;
 }}
 
 [data-testid="stFileUploader"] button {{
-    background-color: {THEME["button_bg"]} !important;
-    color: white !important;
+    background-color: #003B73 !important;
+    color: #FFFFFF !important;
     border-radius: 10px !important;
     border: none !important;
     font-weight: 700 !important;
 }}
 
+[data-testid="stFileUploader"] button * {{
+    color: #FFFFFF !important;
+}}
+
+/* ALERT */
 div[data-testid="stAlert"] {{
-    background-color: {THEME["info_bg"]} !important;
-    color: {THEME["info_text"]} !important;
+    background-color: #DBEAFE !important;
+    color: #075985 !important;
     border-radius: 12px !important;
-    border: 1px solid {THEME["border"]} !important;
+    border: 1px solid #BFDBFE !important;
 }}
 
 div[data-testid="stAlert"] * {{
-    color: {THEME["info_text"]} !important;
+    color: #075985 !important;
 }}
 
+/* BUTTONS */
 .stButton button,
 .stDownloadButton button {{
     border-radius: 10px !important;
     font-weight: 700 !important;
-    border: 1px solid {THEME["border"]} !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: none !important;
 }}
 
 .stButton button[kind="primary"] {{
-    background-color: {THEME["button_bg"]} !important;
+    background-color: #003B73 !important;
     color: white !important;
     border: none !important;
 }}
 
+.stButton button[kind="primary"] * {{
+    color: white !important;
+}}
+
+/* METRICS AND TABLES */
 [data-testid="stMetric"] {{
-    background-color: {THEME["card_bg"]} !important;
-    border: 1px solid {THEME["border"]} !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: 16px !important;
     padding: 16px !important;
 }}
 
 [data-testid="stMetric"] * {{
-    color: {THEME["text"]} !important;
+    color: #111827 !important;
 }}
 
 [data-testid="stDataFrame"] {{
-    background-color: {THEME["card_bg"]} !important;
+    background-color: #FFFFFF !important;
     border-radius: 12px !important;
-    border: 1px solid {THEME["border"]} !important;
+    border: 1px solid #E2E8F0 !important;
 }}
 
 .warning-box {{
@@ -321,7 +377,7 @@ div[data-testid="stAlert"] * {{
 }}
 
 hr {{
-    border-color: {THEME["border"]} !important;
+    border-color: #E2E8F0 !important;
 }}
 
 </style>
