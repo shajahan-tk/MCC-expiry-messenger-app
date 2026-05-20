@@ -29,7 +29,6 @@ SMTP_PORT = 587
 # ==============================
 
 MESSAGE_TYPES = {
-
     "Emirates ID Expiry": {
         "document": "Emirates ID",
         "title": "MCC Emirates ID Expiry Messenger",
@@ -48,7 +47,6 @@ MESSAGE_TYPES = {
             "to avoid penalties or interruption of duties."
         ),
     },
-
     "Passport Expiry": {
         "document": "Passport",
         "title": "MCC Passport Expiry Messenger",
@@ -66,7 +64,6 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy of the Passport at the earliest."
         ),
     },
-
     "Trade Licence Expiry": {
         "document": "Trade Licence",
         "title": "MCC Trade Licence Expiry Messenger",
@@ -84,7 +81,6 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy at the earliest."
         ),
     },
-
     "Workmensation Expiry": {
         "document": "Workmensation",
         "title": "MCC Workmensation Expiry Messenger",
@@ -113,13 +109,13 @@ if "theme_mode" not in st.session_state:
     st.session_state.theme_mode = "Light"
 
 with st.sidebar:
-
     st.header("Appearance")
 
     st.session_state.theme_mode = st.radio(
         "Choose Theme",
         ["Light", "Dark"],
         horizontal=True,
+        index=0 if st.session_state.theme_mode == "Light" else 1,
     )
 
     st.divider()
@@ -132,9 +128,7 @@ with st.sidebar:
     )
 
     MESSAGE_CONFIG = MESSAGE_TYPES[selected_message_type].copy()
-
     REQUIRED_COLUMNS = MESSAGE_CONFIG["required_columns"]
-
     DOCUMENT_NAME = MESSAGE_CONFIG["document"]
 
     st.divider()
@@ -145,7 +139,6 @@ with st.sidebar:
 # ==============================
 
 if st.session_state.theme_mode == "Dark":
-
     THEME = {
         "app_bg": "#0F172A",
         "sidebar_bg": "#111827",
@@ -158,22 +151,22 @@ if st.session_state.theme_mode == "Dark":
         "input_text": "#F8FAFC",
         "info_bg": "#1E3A5F",
         "info_text": "#DBEAFE",
+        "button_bg": "#2563EB",
     }
-
 else:
-
     THEME = {
-        "app_bg": "#F4F7FB",
+        "app_bg": "#F3F6FA",
         "sidebar_bg": "#FFFFFF",
         "card_bg": "#FFFFFF",
         "text": "#111827",
-        "muted": "#4B5563",
+        "muted": "#475569",
         "primary": "#003B73",
-        "border": "#D9E2EC",
+        "border": "#CBD5E1",
         "input_bg": "#FFFFFF",
         "input_text": "#111827",
-        "info_bg": "#E8F2FF",
-        "info_text": "#004A8F",
+        "info_bg": "#DBEAFE",
+        "info_text": "#075985",
+        "button_bg": "#003B73",
     }
 
 
@@ -192,13 +185,13 @@ html, body, .stApp {{
 .main .block-container {{
     max-width: 1250px;
     padding-top: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }}
 
 [data-testid="stSidebar"] {{
     background-color: {THEME["sidebar_bg"]} !important;
-    border-right: 1px solid {THEME["border"]};
+    border-right: 1px solid {THEME["border"]} !important;
 }}
 
 [data-testid="stSidebar"] * {{
@@ -218,7 +211,7 @@ p, label, span, div {{
     font-size: 36px;
     font-weight: 800;
     color: {THEME["primary"]} !important;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
 }}
 
 .sub-title {{
@@ -232,6 +225,11 @@ input, textarea, select {{
     color: {THEME["input_text"]} !important;
     border-radius: 10px !important;
     border: 1px solid {THEME["border"]} !important;
+}}
+
+input:focus, textarea:focus {{
+    border: 1px solid {THEME["primary"]} !important;
+    box-shadow: 0 0 0 1px {THEME["primary"]} !important;
 }}
 
 [data-baseweb="select"] > div {{
@@ -261,10 +259,11 @@ input, textarea, select {{
 }}
 
 [data-testid="stFileUploader"] button {{
-    background-color: {THEME["primary"]} !important;
+    background-color: {THEME["button_bg"]} !important;
     color: white !important;
     border-radius: 10px !important;
     border: none !important;
+    font-weight: 700 !important;
 }}
 
 div[data-testid="stAlert"] {{
@@ -286,7 +285,7 @@ div[data-testid="stAlert"] * {{
 }}
 
 .stButton button[kind="primary"] {{
-    background-color: {THEME["primary"]} !important;
+    background-color: {THEME["button_bg"]} !important;
     color: white !important;
     border: none !important;
 }}
@@ -346,9 +345,7 @@ def validate_columns(df, required_columns):
 
 
 def clean_data(df, required_columns):
-
     df = df.copy()
-
     df = df.dropna(subset=["email"])
 
     for col in required_columns:
@@ -360,26 +357,15 @@ def clean_data(df, required_columns):
     return df
 
 
-def build_email_body(
-    group,
-    company_name,
-    message_config,
-    required_columns,
-    custom_message,
-):
-
+def build_email_body(group, company_name, message_config, required_columns, custom_message):
     supplier_names = group["supplier name"].dropna().unique()
-
     supplier_text = ", ".join([str(x) for x in supplier_names])
 
     clean_message = escape(custom_message).replace("\n", "<br>")
 
     table_headers = ""
-
     for col, display_name in required_columns.items():
-
         if col != "email":
-
             table_headers += f"""
             <th style="border:1px solid #000;padding:8px;background:#f2f2f2;">
                 {escape(display_name)}
@@ -387,15 +373,11 @@ def build_email_body(
             """
 
     table_rows = ""
-
     for _, row in group.iterrows():
-
         row_cells = ""
 
         for col in required_columns:
-
             if col != "email":
-
                 row_cells += f"""
                 <td style="border:1px solid #000;padding:6px;">
                     {escape(str(row[col]))}
@@ -417,23 +399,14 @@ def build_email_body(
         <b>{escape(message_config["details_title"])}:</b><br><br>
 
         <table style="border-collapse:collapse;width:100%;">
-
-            <tr>
-                {table_headers}
-            </tr>
-
+            <tr>{table_headers}</tr>
             {table_rows}
-
         </table>
 
         <br>
-
         Your prompt action in this matter will be highly appreciated.
-
         <br><br>
-
         Regards,<br>
-
         <b>{escape(company_name)}</b>
 
     </body>
@@ -443,35 +416,18 @@ def build_email_body(
     return body
 
 
-def send_email(
-    sender_email,
-    app_password,
-    to_email,
-    subject,
-    body_html,
-    sender_name,
-):
-
+def send_email(sender_email, app_password, to_email, subject, body_html, sender_name):
     msg = MIMEMultipart()
-
     msg["Subject"] = subject
-
     msg["From"] = formataddr((sender_name, sender_email))
-
     msg["To"] = to_email
-
     msg.attach(MIMEText(body_html, "html", "utf-8"))
 
     with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=30) as server:
-
         server.ehlo()
-
         server.starttls()
-
         server.ehlo()
-
         server.login(sender_email, app_password)
-
         server.sendmail(sender_email, to_email, msg.as_string())
 
 
@@ -480,7 +436,6 @@ def send_email(
 # ==============================
 
 with st.sidebar:
-
     st.header("Email Settings")
 
     sender_email = st.text_input(
@@ -517,9 +472,7 @@ with st.sidebar:
 
     st.divider()
 
-    st.caption(
-        "Tip: keep the password in environment variables, not inside the code."
-    )
+    st.caption("Tip: keep the password in environment variables, not inside the code.")
 
 
 # ==============================
@@ -558,10 +511,223 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is None:
-
     st.info(
         "Upload an Excel file with these columns: "
         + ", ".join(REQUIRED_COLUMNS.values())
     )
-
     st.stop()
+
+
+# ==============================
+# READ EXCEL
+# ==============================
+
+try:
+    raw_df = pd.read_excel(uploaded_file)
+    df = normalize_excel(raw_df)
+
+except Exception as exc:
+    st.error(f"Could not read Excel file: {exc}")
+    st.stop()
+
+
+# ==============================
+# VALIDATE
+# ==============================
+
+missing_cols = validate_columns(df, REQUIRED_COLUMNS)
+
+if missing_cols:
+    missing_names = [REQUIRED_COLUMNS[col] for col in missing_cols]
+
+    st.error("Missing required columns: " + ", ".join(missing_names))
+    st.write("Columns found:", list(df.columns))
+    st.stop()
+
+
+# ==============================
+# CLEAN DATA
+# ==============================
+
+clean_df = clean_data(df, REQUIRED_COLUMNS)
+
+if clean_df.empty:
+    st.warning("No valid rows found after cleaning email column.")
+    st.stop()
+
+
+# ==============================
+# METRICS
+# ==============================
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.metric("Total Records", len(clean_df))
+col2.metric("Supplier Emails", clean_df["email"].nunique())
+col3.metric("Suppliers", clean_df["supplier name"].nunique())
+
+if "visa sponsor" in clean_df.columns:
+    col4.metric("Visa Sponsors", clean_df["visa sponsor"].nunique())
+else:
+    col4.metric("Message Type", DOCUMENT_NAME)
+
+
+# ==============================
+# DATA PREVIEW
+# ==============================
+
+st.subheader("Data Preview")
+
+st.dataframe(
+    clean_df[list(REQUIRED_COLUMNS.keys())],
+    use_container_width=True,
+)
+
+
+# ==============================
+# EMAIL PREVIEW
+# ==============================
+
+st.subheader("Email Preview")
+
+email_options = list(clean_df["email"].dropna().unique())
+
+selected_email = st.selectbox(
+    "Choose supplier email to preview",
+    email_options,
+)
+
+preview_group = clean_df[clean_df["email"] == selected_email]
+
+preview_body = build_email_body(
+    group=preview_group,
+    company_name=company_name,
+    message_config=MESSAGE_CONFIG,
+    required_columns=REQUIRED_COLUMNS,
+    custom_message=custom_message,
+)
+
+st.components.v1.html(
+    preview_body,
+    height=520,
+    scrolling=True,
+)
+
+
+# ==============================
+# SEND EMAILS
+# ==============================
+
+st.subheader("Send Emails")
+
+st.markdown(
+    f"""
+    <div class="warning-box">
+        Before sending, check the preview and make sure the Excel data is correct.
+        Current Message Type: {escape(DOCUMENT_NAME)}
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+send_col1, send_col2 = st.columns(2)
+
+with send_col1:
+    preview_only = st.button(
+        "Run Preview Only",
+        use_container_width=True,
+    )
+
+with send_col2:
+    send_now = st.button(
+        f"Send {DOCUMENT_NAME} Emails Now",
+        type="primary",
+        use_container_width=True,
+    )
+
+
+# ==============================
+# SEND LOGIC
+# ==============================
+
+if preview_only or send_now:
+    if not sender_email or not app_password:
+        st.error("Sender email and Microsoft 365 app password are required.")
+        st.stop()
+
+    grouped = clean_df.groupby("email", sort=False)
+
+    progress = st.progress(0)
+    status = st.empty()
+    results = []
+
+    total = len(grouped)
+
+    for index, (to_email, group) in enumerate(grouped, start=1):
+        status.info(f"Processing {index}/{total}: {to_email}")
+
+        body = build_email_body(
+            group=group,
+            company_name=company_name,
+            message_config=MESSAGE_CONFIG,
+            required_columns=REQUIRED_COLUMNS,
+            custom_message=custom_message,
+        )
+
+        try:
+            if not preview_only:
+                send_email(
+                    sender_email=sender_email,
+                    app_password=app_password,
+                    to_email=to_email,
+                    subject=subject,
+                    body_html=body,
+                    sender_name=sender_name,
+                )
+
+            results.append(
+                {
+                    "Email": to_email,
+                    "Supplier": ", ".join(group["supplier name"].dropna().unique()),
+                    "Records": len(group),
+                    "Status": "Preview Only" if preview_only else "Sent",
+                }
+            )
+
+        except Exception as exc:
+            results.append(
+                {
+                    "Email": to_email,
+                    "Supplier": ", ".join(group["supplier name"].dropna().unique()),
+                    "Records": len(group),
+                    "Status": f"Failed - {exc}",
+                }
+            )
+
+        progress.progress(index / total)
+
+    status.success("Completed")
+
+    results_df = pd.DataFrame(results)
+
+    st.subheader("Sending Report")
+
+    st.dataframe(
+        results_df,
+        use_container_width=True,
+    )
+
+    csv_data = results_df.to_csv(index=False).encode("utf-8")
+
+    filename = (
+        f"mcc_{DOCUMENT_NAME.lower().replace(' ', '_')}_"
+        f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    )
+
+    st.download_button(
+        "Download Report CSV",
+        csv_data,
+        filename,
+        "text/csv",
+        use_container_width=True,
+    )
