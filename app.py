@@ -29,6 +29,7 @@ SMTP_PORT = 587
 # ==============================
 
 MESSAGE_TYPES = {
+
     "Emirates ID Expiry": {
         "document": "Emirates ID",
         "title": "MCC Emirates ID Expiry Messenger",
@@ -44,7 +45,7 @@ MESSAGE_TYPES = {
         "message": (
             "This is to inform you that your labour's Emirates ID is going to expire soon. "
             "Kindly renew and update the valid copy of your Emirates ID at the earliest "
-            "to avoid any penalties, fines, or interruption/holding of your labour duties."
+            "to avoid penalties or interruption of duties."
         ),
     },
 
@@ -62,8 +63,7 @@ MESSAGE_TYPES = {
         },
         "message": (
             "This is to inform you that your labour's Passport is going to expire soon. "
-            "Kindly renew and update the valid copy of the Passport at the earliest "
-            "to avoid any penalties, fines, or interruption/holding of your labour duties."
+            "Kindly renew and update the valid copy of the Passport at the earliest."
         ),
     },
 
@@ -81,8 +81,7 @@ MESSAGE_TYPES = {
         },
         "message": (
             "This is to inform you that your Trade Licence is going to expire soon. "
-            "Kindly renew and update the valid copy of your Trade Licence at the earliest "
-            "to avoid any penalties, fines, or interruption of services."
+            "Kindly renew and update the valid copy at the earliest."
         ),
     },
 
@@ -100,8 +99,7 @@ MESSAGE_TYPES = {
         },
         "message": (
             "This is to inform you that your Workmensation policy is going to expire soon. "
-            "Kindly renew and update the valid copy of your Workmensation policy at the earliest "
-            "to avoid any penalties, fines, or interruption of services."
+            "Kindly renew and update the valid copy at the earliest."
         ),
     },
 }
@@ -211,16 +209,21 @@ html, body, .stApp {{
     background: transparent !important;
 }}
 
+h1, h2, h3, h4, h5, h6,
+p, label, span, div {{
+    color: {THEME["text"]} !important;
+}}
+
 .main-title {{
     font-size: 36px;
     font-weight: 800;
-    color: {THEME["primary"]};
+    color: {THEME["primary"]} !important;
     margin-bottom: 0px;
 }}
 
 .sub-title {{
     font-size: 17px;
-    color: {THEME["muted"]};
+    color: {THEME["muted"]} !important;
     margin-top: 6px;
 }}
 
@@ -229,6 +232,17 @@ input, textarea, select {{
     color: {THEME["input_text"]} !important;
     border-radius: 10px !important;
     border: 1px solid {THEME["border"]} !important;
+}}
+
+[data-baseweb="select"] > div {{
+    background-color: {THEME["input_bg"]} !important;
+    color: {THEME["input_text"]} !important;
+    border: 1px solid {THEME["border"]} !important;
+    border-radius: 10px !important;
+}}
+
+[data-baseweb="select"] span {{
+    color: {THEME["input_text"]} !important;
 }}
 
 [data-testid="stTextArea"] textarea {{
@@ -242,36 +256,73 @@ input, textarea, select {{
     padding: 1rem !important;
 }}
 
-.stButton button {{
+[data-testid="stFileUploader"] section * {{
+    color: {THEME["text"]} !important;
+}}
+
+[data-testid="stFileUploader"] button {{
+    background-color: {THEME["primary"]} !important;
+    color: white !important;
+    border-radius: 10px !important;
+    border: none !important;
+}}
+
+div[data-testid="stAlert"] {{
+    background-color: {THEME["info_bg"]} !important;
+    color: {THEME["info_text"]} !important;
+    border-radius: 12px !important;
+    border: 1px solid {THEME["border"]} !important;
+}}
+
+div[data-testid="stAlert"] * {{
+    color: {THEME["info_text"]} !important;
+}}
+
+.stButton button,
+.stDownloadButton button {{
     border-radius: 10px !important;
     font-weight: 700 !important;
+    border: 1px solid {THEME["border"]} !important;
 }}
 
 .stButton button[kind="primary"] {{
     background-color: {THEME["primary"]} !important;
     color: white !important;
+    border: none !important;
 }}
 
 [data-testid="stMetric"] {{
-    background-color: {THEME["card_bg"]};
-    border: 1px solid {THEME["border"]};
-    border-radius: 16px;
-    padding: 16px;
+    background-color: {THEME["card_bg"]} !important;
+    border: 1px solid {THEME["border"]} !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+}}
+
+[data-testid="stMetric"] * {{
+    color: {THEME["text"]} !important;
 }}
 
 [data-testid="stDataFrame"] {{
-    background-color: {THEME["card_bg"]};
-    border-radius: 12px;
-    border: 1px solid {THEME["border"]};
+    background-color: {THEME["card_bg"]} !important;
+    border-radius: 12px !important;
+    border: 1px solid {THEME["border"]} !important;
 }}
 
 .warning-box {{
-    background: #FFF7E6;
-    border-left: 5px solid #F59E0B;
-    padding: 14px 18px;
-    border-radius: 10px;
-    color: #663C00;
-    font-weight: 600;
+    background: #FFF7E6 !important;
+    border-left: 5px solid #F59E0B !important;
+    padding: 14px 18px !important;
+    border-radius: 10px !important;
+    color: #663C00 !important;
+    font-weight: 600 !important;
+}}
+
+.warning-box * {{
+    color: #663C00 !important;
+}}
+
+hr {{
+    border-color: {THEME["border"]} !important;
 }}
 
 </style>
@@ -483,7 +534,7 @@ with top_col1:
 with top_col2:
     st.markdown(
         f"""
-        <div style="padding-top: 18px;">
+        <div style="padding-top:18px;">
             <div class="main-title">{escape(MESSAGE_CONFIG["title"])}</div>
             <div class="sub-title">
                 Upload Excel, preview supplier emails, validate data,
@@ -495,6 +546,7 @@ with top_col2:
     )
 
 st.markdown("<br>", unsafe_allow_html=True)
+
 
 # ==============================
 # FILE UPLOAD
@@ -513,258 +565,3 @@ if uploaded_file is None:
     )
 
     st.stop()
-
-
-# ==============================
-# READ EXCEL
-# ==============================
-
-try:
-
-    raw_df = pd.read_excel(uploaded_file)
-
-    df = normalize_excel(raw_df)
-
-except Exception as exc:
-
-    st.error(f"Could not read Excel file: {exc}")
-
-    st.stop()
-
-
-# ==============================
-# VALIDATE
-# ==============================
-
-missing_cols = validate_columns(df, REQUIRED_COLUMNS)
-
-if missing_cols:
-
-    missing_names = [REQUIRED_COLUMNS[col] for col in missing_cols]
-
-    st.error("Missing required columns: " + ", ".join(missing_names))
-
-    st.write("Columns found:", list(df.columns))
-
-    st.stop()
-
-
-# ==============================
-# CLEAN DATA
-# ==============================
-
-clean_df = clean_data(df, REQUIRED_COLUMNS)
-
-if clean_df.empty:
-
-    st.warning("No valid rows found after cleaning email column.")
-
-    st.stop()
-
-
-# ==============================
-# METRICS
-# ==============================
-
-col1, col2, col3, col4 = st.columns(4)
-
-col1.metric("Total Records", len(clean_df))
-
-col2.metric("Supplier Emails", clean_df["email"].nunique())
-
-col3.metric("Suppliers", clean_df["supplier name"].nunique())
-
-if "visa sponsor" in clean_df.columns:
-
-    col4.metric(
-        "Visa Sponsors",
-        clean_df["visa sponsor"].nunique(),
-    )
-
-else:
-
-    col4.metric("Message Type", DOCUMENT_NAME)
-
-
-# ==============================
-# DATA PREVIEW
-# ==============================
-
-st.subheader("Data Preview")
-
-st.dataframe(
-    clean_df[list(REQUIRED_COLUMNS.keys())],
-    use_container_width=True,
-)
-
-
-# ==============================
-# EMAIL PREVIEW
-# ==============================
-
-st.subheader("Email Preview")
-
-email_options = list(clean_df["email"].dropna().unique())
-
-selected_email = st.selectbox(
-    "Choose supplier email to preview",
-    email_options,
-)
-
-preview_group = clean_df[
-    clean_df["email"] == selected_email
-]
-
-preview_body = build_email_body(
-    group=preview_group,
-    company_name=company_name,
-    message_config=MESSAGE_CONFIG,
-    required_columns=REQUIRED_COLUMNS,
-    custom_message=custom_message,
-)
-
-st.components.v1.html(
-    preview_body,
-    height=520,
-    scrolling=True,
-)
-
-
-# ==============================
-# SEND EMAILS
-# ==============================
-
-st.subheader("Send Emails")
-
-st.markdown(
-    f"""
-    <div class="warning-box">
-        Before sending, check the preview and make sure the Excel data is correct.
-        Current Message Type: {escape(DOCUMENT_NAME)}
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-send_col1, send_col2 = st.columns(2)
-
-with send_col1:
-
-    preview_only = st.button(
-        "Run Preview Only",
-        use_container_width=True,
-    )
-
-with send_col2:
-
-    send_now = st.button(
-        f"Send {DOCUMENT_NAME} Emails Now",
-        type="primary",
-        use_container_width=True,
-    )
-
-
-# ==============================
-# SEND LOGIC
-# ==============================
-
-if preview_only or send_now:
-
-    if not sender_email or not app_password:
-
-        st.error(
-            "Sender email and Microsoft 365 app password are required."
-        )
-
-        st.stop()
-
-    grouped = clean_df.groupby("email", sort=False)
-
-    progress = st.progress(0)
-
-    status = st.empty()
-
-    results = []
-
-    total = len(grouped)
-
-    for index, (to_email, group) in enumerate(grouped, start=1):
-
-        status.info(f"Processing {index}/{total}: {to_email}")
-
-        body = build_email_body(
-            group=group,
-            company_name=company_name,
-            message_config=MESSAGE_CONFIG,
-            required_columns=REQUIRED_COLUMNS,
-            custom_message=custom_message,
-        )
-
-        try:
-
-            if not preview_only:
-
-                send_email(
-                    sender_email=sender_email,
-                    app_password=app_password,
-                    to_email=to_email,
-                    subject=subject,
-                    body_html=body,
-                    sender_name=sender_name,
-                )
-
-            results.append(
-                {
-                    "Email": to_email,
-                    "Supplier": ", ".join(
-                        group["supplier name"].dropna().unique()
-                    ),
-                    "Records": len(group),
-                    "Status": (
-                        "Preview Only"
-                        if preview_only
-                        else "Sent"
-                    ),
-                }
-            )
-
-        except Exception as exc:
-
-            results.append(
-                {
-                    "Email": to_email,
-                    "Supplier": ", ".join(
-                        group["supplier name"].dropna().unique()
-                    ),
-                    "Records": len(group),
-                    "Status": f"Failed - {exc}",
-                }
-            )
-
-        progress.progress(index / total)
-
-    status.success("Completed")
-
-    results_df = pd.DataFrame(results)
-
-    st.subheader("Sending Report")
-
-    st.dataframe(
-        results_df,
-        use_container_width=True,
-    )
-
-    csv_data = results_df.to_csv(index=False).encode("utf-8")
-
-    filename = (
-        f"mcc_{DOCUMENT_NAME.lower().replace(' ', '_')}_"
-        f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-    )
-
-    st.download_button(
-        "Download Report CSV",
-        csv_data,
-        filename,
-        "text/csv",
-        use_container_width=True,
-    )
