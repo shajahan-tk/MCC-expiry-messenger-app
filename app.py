@@ -14,7 +14,6 @@ import streamlit as st
 # PAGE CONFIG
 # ==============================
 
-
 st.set_page_config(
     page_title="MCC Expiry Messenger",
     page_icon="📨",
@@ -22,113 +21,23 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# REMOVE STREAMLIT HEADER / THEME MENU
-
 st.markdown(
     """
     <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 
-    #MainMenu {
-        visibility: hidden;
-    }
-    .custom-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #FFFFFF;
-        border-top: 1px solid #E2E8F0;
-        padding: 10px 20px;
-        text-align: center;
-        z-index: 999999;
-        font-size: 14px;
-        color: #475569;
-        font-weight: 500;
-    }
-
-    .custom-footer strong {
-        color: #003B73;
-    }
-
-    .main .block-container {
-        padding-bottom: 60px;
-    }
-
-
-    footer {
-        visibility: hidden;
-    }
-
-    header {
-        visibility: hidden;
-    }
-
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
-
-    [data-testid="stDecoration"] {
-        display: none !important;
-    }
-
-    [data-testid="stStatusWidget"] {
-        display: none !important;
-    }
-
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    [data-testid="stStatusWidget"],
     button[kind="header"] {
         display: none !important;
     }
-
     </style>
-
-        <div class="custom-footer">
-        <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-        &nbsp; | &nbsp;
-        Developed by <strong>Mr. Shajahan Tk</strong>
-    </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
-
-# ==============================
-# FOOTER
-# ==============================
-
-def show_footer():
-    st.markdown(
-        """
-        <style>
-        .custom-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #FFFFFF;
-            border-top: 1px solid #E2E8F0;
-            padding: 10px 20px;
-            text-align: center;
-            z-index: 999999;
-            font-size: 14px;
-            color: #475569;
-            font-weight: 500;
-        }
-
-        .custom-footer strong {
-            color: #003B73;
-        }
-
-        .main .block-container {
-            padding-bottom: 70px;
-        }
-        </style>
-
-        """,
-        unsafe_allow_html=True,
-    )
-
-show_footer()
-
-
 
 SMTP_HOST = "smtp.office365.com"
 SMTP_PORT = 587
@@ -139,7 +48,6 @@ SMTP_PORT = 587
 # ==============================
 
 MESSAGE_TYPES = {
-
     "Emirates ID Expiry": {
         "document": "Emirates ID",
         "title": "MCC Emirates ID Expiry Messenger",
@@ -158,7 +66,6 @@ MESSAGE_TYPES = {
             "to avoid penalties or interruption of duties."
         ),
     },
-
     "Passport Expiry": {
         "document": "Passport",
         "title": "MCC Passport Expiry Messenger",
@@ -176,7 +83,6 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy of the Passport at the earliest."
         ),
     },
-
     "Trade Licence Expiry": {
         "document": "Trade Licence",
         "title": "MCC Trade Licence Expiry Messenger",
@@ -194,7 +100,6 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy at the earliest."
         ),
     },
-
     "Workmensation Expiry": {
         "document": "Workmensation",
         "title": "MCC Workmensation Expiry Messenger",
@@ -220,7 +125,6 @@ MESSAGE_TYPES = {
 # ==============================
 
 with st.sidebar:
-
     st.header("Message Type")
 
     selected_message_type = st.selectbox(
@@ -229,9 +133,7 @@ with st.sidebar:
     )
 
     MESSAGE_CONFIG = MESSAGE_TYPES[selected_message_type].copy()
-
     REQUIRED_COLUMNS = MESSAGE_CONFIG["required_columns"]
-
     DOCUMENT_NAME = MESSAGE_CONFIG["document"]
 
     st.divider()
@@ -274,6 +176,7 @@ html, body, .stApp {{
     padding-top: 2rem;
     padding-left: 3rem;
     padding-right: 3rem;
+    padding-bottom: 80px;
 }}
 
 [data-testid="stSidebar"] {{
@@ -307,8 +210,6 @@ p, label, span, div {{
     margin-top: 6px;
 }}
 
-/* INPUTS */
-
 input, textarea {{
     background-color: #FFFFFF !important;
     color: #111827 !important;
@@ -321,8 +222,6 @@ input:focus, textarea:focus {{
     border: 1px solid #003B73 !important;
     box-shadow: 0 0 0 1px #003B73 !important;
 }}
-
-/* SELECT BOX */
 
 [data-baseweb="select"] > div {{
     background-color: #FFFFFF !important;
@@ -341,8 +240,6 @@ input:focus, textarea:focus {{
     fill: #111827 !important;
     color: #111827 !important;
 }}
-
-/* DROPDOWN FIX */
 
 ul[role="listbox"] {{
     background-color: #FFFFFF !important;
@@ -366,12 +263,12 @@ ul[role="listbox"] li:hover {{
     color: #003B73 !important;
 }}
 
-[data-baseweb="popover"] {{
+[data-baseweb="popover"],
+[data-baseweb="menu"] {{
     background-color: #FFFFFF !important;
 }}
 
 [data-baseweb="menu"] {{
-    background-color: #FFFFFF !important;
     border-radius: 10px !important;
     border: 1px solid #CBD5E1 !important;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
@@ -388,8 +285,6 @@ ul[role="listbox"] li:hover {{
 [data-baseweb="menu"] li:hover {{
     background-color: #DBEAFE !important;
 }}
-
-/* FILE UPLOADER */
 
 [data-testid="stFileUploader"] section {{
     background-color: #FFFFFF !important;
@@ -414,8 +309,6 @@ ul[role="listbox"] li:hover {{
     color: #FFFFFF !important;
 }}
 
-/* ALERT */
-
 div[data-testid="stAlert"] {{
     background-color: #DBEAFE !important;
     border: 1px solid #BFDBFE !important;
@@ -425,8 +318,6 @@ div[data-testid="stAlert"] {{
 div[data-testid="stAlert"] * {{
     color: #075985 !important;
 }}
-
-/* BUTTONS */
 
 .stButton button,
 .stDownloadButton button {{
@@ -446,8 +337,6 @@ div[data-testid="stAlert"] * {{
     color: #FFFFFF !important;
 }}
 
-/* METRICS */
-
 [data-testid="stMetric"] {{
     background-color: #FFFFFF !important;
     border: 1px solid #E2E8F0 !important;
@@ -459,15 +348,11 @@ div[data-testid="stAlert"] * {{
     color: #111827 !important;
 }}
 
-/* DATAFRAME */
-
 [data-testid="stDataFrame"] {{
     background-color: #FFFFFF !important;
     border-radius: 12px !important;
     border: 1px solid #E2E8F0 !important;
 }}
-
-/* WARNING BOX */
 
 .warning-box {{
     background: #FFF7E6 !important;
@@ -482,14 +367,31 @@ div[data-testid="stAlert"] * {{
     color: #663C00 !important;
 }}
 
+.custom-footer {{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    padding: 10px 20px;
+    text-align: center;
+    z-index: 999999;
+    font-size: 14px;
+    color: #475569 !important;
+    font-weight: 500;
+}}
+
+.custom-footer strong {{
+    color: #003B73 !important;
+}}
+
 hr {{
     border-color: #E2E8F0 !important;
 }}
 
 </style>
 """
-
-
 
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
@@ -679,6 +581,16 @@ if uploaded_file is None:
         "Upload an Excel file with these columns: "
         + ", ".join(REQUIRED_COLUMNS.values())
     )
+    st.markdown(
+        """
+        <div class="custom-footer">
+            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+            &nbsp; | &nbsp;
+            Developed by <strong>Mr. Shajahan Tk</strong>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.stop()
 
 
@@ -692,6 +604,16 @@ try:
 
 except Exception as exc:
     st.error(f"Could not read Excel file: {exc}")
+    st.markdown(
+        """
+        <div class="custom-footer">
+            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+            &nbsp; | &nbsp;
+            Developed by <strong>Mr. Shajahan Tk</strong>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.stop()
 
 
@@ -706,6 +628,16 @@ if missing_cols:
 
     st.error("Missing required columns: " + ", ".join(missing_names))
     st.write("Columns found:", list(df.columns))
+    st.markdown(
+        """
+        <div class="custom-footer">
+            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+            &nbsp; | &nbsp;
+            Developed by <strong>Mr. Shajahan Tk</strong>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.stop()
 
 
@@ -717,6 +649,16 @@ clean_df = clean_data(df, REQUIRED_COLUMNS)
 
 if clean_df.empty:
     st.warning("No valid rows found after cleaning email column.")
+    st.markdown(
+        """
+        <div class="custom-footer">
+            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+            &nbsp; | &nbsp;
+            Developed by <strong>Mr. Shajahan Tk</strong>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.stop()
 
 
@@ -817,81 +759,96 @@ with send_col2:
 if preview_only or send_now:
     if not sender_email or not app_password:
         st.error("Sender email and Microsoft 365 app password are required.")
-        st.stop()
+    else:
+        grouped = clean_df.groupby("email", sort=False)
 
-    grouped = clean_df.groupby("email", sort=False)
+        progress = st.progress(0)
+        status = st.empty()
+        results = []
 
-    progress = st.progress(0)
-    status = st.empty()
-    results = []
+        total = len(grouped)
 
-    total = len(grouped)
+        for index, (to_email, group) in enumerate(grouped, start=1):
+            status.info(f"Processing {index}/{total}: {to_email}")
 
-    for index, (to_email, group) in enumerate(grouped, start=1):
-        status.info(f"Processing {index}/{total}: {to_email}")
+            body = build_email_body(
+                group=group,
+                company_name=company_name,
+                message_config=MESSAGE_CONFIG,
+                required_columns=REQUIRED_COLUMNS,
+                custom_message=custom_message,
+            )
 
-        body = build_email_body(
-            group=group,
-            company_name=company_name,
-            message_config=MESSAGE_CONFIG,
-            required_columns=REQUIRED_COLUMNS,
-            custom_message=custom_message,
-        )
+            try:
+                if not preview_only:
+                    send_email(
+                        sender_email=sender_email,
+                        app_password=app_password,
+                        to_email=to_email,
+                        subject=subject,
+                        body_html=body,
+                        sender_name=sender_name,
+                    )
 
-        try:
-            if not preview_only:
-                send_email(
-                    sender_email=sender_email,
-                    app_password=app_password,
-                    to_email=to_email,
-                    subject=subject,
-                    body_html=body,
-                    sender_name=sender_name,
+                results.append(
+                    {
+                        "Email": to_email,
+                        "Supplier": ", ".join(group["supplier name"].dropna().unique()),
+                        "Records": len(group),
+                        "Status": "Preview Only" if preview_only else "Sent",
+                    }
                 )
 
-            results.append(
-                {
-                    "Email": to_email,
-                    "Supplier": ", ".join(group["supplier name"].dropna().unique()),
-                    "Records": len(group),
-                    "Status": "Preview Only" if preview_only else "Sent",
-                }
-            )
+            except Exception as exc:
+                results.append(
+                    {
+                        "Email": to_email,
+                        "Supplier": ", ".join(group["supplier name"].dropna().unique()),
+                        "Records": len(group),
+                        "Status": f"Failed - {exc}",
+                    }
+                )
 
-        except Exception as exc:
-            results.append(
-                {
-                    "Email": to_email,
-                    "Supplier": ", ".join(group["supplier name"].dropna().unique()),
-                    "Records": len(group),
-                    "Status": f"Failed - {exc}",
-                }
-            )
+            progress.progress(index / total)
 
-        progress.progress(index / total)
+        status.success("Completed")
 
-    status.success("Completed")
+        results_df = pd.DataFrame(results)
 
-    results_df = pd.DataFrame(results)
+        st.subheader("Sending Report")
 
-    st.subheader("Sending Report")
+        st.dataframe(
+            results_df,
+            use_container_width=True,
+        )
 
-    st.dataframe(
-        results_df,
-        use_container_width=True,
-    )
+        csv_data = results_df.to_csv(index=False).encode("utf-8")
 
-    csv_data = results_df.to_csv(index=False).encode("utf-8")
+        filename = (
+            f"mcc_{DOCUMENT_NAME.lower().replace(' ', '_')}_"
+            f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        )
 
-    filename = (
-        f"mcc_{DOCUMENT_NAME.lower().replace(' ', '_')}_"
-        f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-    )
+        st.download_button(
+            "Download Report CSV",
+            csv_data,
+            filename,
+            "text/csv",
+            use_container_width=True,
+        )
 
-    st.download_button(
-        "Download Report CSV",
-        csv_data,
-        filename,
-        "text/csv",
-        use_container_width=True,
-    )
+
+# ==============================
+# FOOTER
+# ==============================
+
+st.markdown(
+    """
+    <div class="custom-footer">
+        <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+        &nbsp; | &nbsp;
+        Developed by <strong>Mr. Shajahan Tk</strong>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
