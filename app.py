@@ -20,6 +20,52 @@ st.set_page_config(
     layout="wide",
 )
 
+st.set_page_config(
+    page_title="MCC Expiry Messenger",
+    page_icon="📨",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# REMOVE STREAMLIT HEADER / THEME MENU
+
+st.markdown(
+    """
+    <style>
+
+    #MainMenu {
+        visibility: hidden;
+    }
+
+    footer {
+        visibility: hidden;
+    }
+
+    header {
+        visibility: hidden;
+    }
+
+    [data-testid="stToolbar"] {
+        display: none !important;
+    }
+
+    [data-testid="stDecoration"] {
+        display: none !important;
+    }
+
+    [data-testid="stStatusWidget"] {
+        display: none !important;
+    }
+
+    button[kind="header"] {
+        display: none !important;
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 SMTP_HOST = "smtp.office365.com"
 SMTP_PORT = 587
 
@@ -29,6 +75,7 @@ SMTP_PORT = 587
 # ==============================
 
 MESSAGE_TYPES = {
+
     "Emirates ID Expiry": {
         "document": "Emirates ID",
         "title": "MCC Emirates ID Expiry Messenger",
@@ -47,6 +94,7 @@ MESSAGE_TYPES = {
             "to avoid penalties or interruption of duties."
         ),
     },
+
     "Passport Expiry": {
         "document": "Passport",
         "title": "MCC Passport Expiry Messenger",
@@ -64,6 +112,7 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy of the Passport at the earliest."
         ),
     },
+
     "Trade Licence Expiry": {
         "document": "Trade Licence",
         "title": "MCC Trade Licence Expiry Messenger",
@@ -81,6 +130,7 @@ MESSAGE_TYPES = {
             "Kindly renew and update the valid copy at the earliest."
         ),
     },
+
     "Workmensation Expiry": {
         "document": "Workmensation",
         "title": "MCC Workmensation Expiry Messenger",
@@ -100,13 +150,6 @@ MESSAGE_TYPES = {
     },
 }
 
-
-# ==============================
-# SIDEBAR
-# ==============================
-
-if "theme_mode" not in st.session_state:
-    st.session_state.theme_mode = "Light"
 
 # ==============================
 # SIDEBAR
@@ -184,7 +227,7 @@ html, body, .stApp {{
 
 h1, h2, h3, h4, h5, h6,
 p, label, span, div {{
-    color: {THEME["text"]} !important;
+    color: #111827 !important;
 }}
 
 .main-title {{
