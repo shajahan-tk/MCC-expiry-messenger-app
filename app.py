@@ -108,17 +108,11 @@ MESSAGE_TYPES = {
 if "theme_mode" not in st.session_state:
     st.session_state.theme_mode = "Light"
 
+# ==============================
+# SIDEBAR
+# ==============================
+
 with st.sidebar:
-    st.header("Appearance")
-
-    st.session_state.theme_mode = st.radio(
-        "Choose Theme",
-        ["Light", "Dark"],
-        horizontal=True,
-        index=0 if st.session_state.theme_mode == "Light" else 1,
-    )
-
-    st.divider()
 
     st.header("Message Type")
 
@@ -128,7 +122,9 @@ with st.sidebar:
     )
 
     MESSAGE_CONFIG = MESSAGE_TYPES[selected_message_type].copy()
+
     REQUIRED_COLUMNS = MESSAGE_CONFIG["required_columns"]
+
     DOCUMENT_NAME = MESSAGE_CONFIG["document"]
 
     st.divider()
@@ -138,39 +134,26 @@ with st.sidebar:
 # THEME
 # ==============================
 
-if st.session_state.theme_mode == "Dark":
-    THEME = {
-        "app_bg": "#0F172A",
-        "sidebar_bg": "#111827",
-        "card_bg": "#1E293B",
-        "text": "#F8FAFC",
-        "muted": "#CBD5E1",
-        "primary": "#60A5FA",
-        "border": "#334155",
-        "input_bg": "#0F172A",
-        "input_text": "#F8FAFC",
-        "info_bg": "#1E3A5F",
-        "info_text": "#DBEAFE",
-        "button_bg": "#2563EB",
-    }
-else:
-    THEME = {
-        "app_bg": "#F3F6FA",
-        "sidebar_bg": "#FFFFFF",
-        "card_bg": "#FFFFFF",
-        "text": "#111827",
-        "muted": "#475569",
-        "primary": "#003B73",
-        "border": "#CBD5E1",
-        "input_bg": "#FFFFFF",
-        "input_text": "#111827",
-        "info_bg": "#DBEAFE",
-        "info_text": "#075985",
-        "button_bg": "#003B73",
-    }
+THEME = {
+    "app_bg": "#F3F6FA",
+    "sidebar_bg": "#FFFFFF",
+    "card_bg": "#FFFFFF",
+    "text": "#111827",
+    "muted": "#475569",
+    "primary": "#003B73",
+    "border": "#CBD5E1",
+    "input_bg": "#FFFFFF",
+    "input_text": "#111827",
+    "info_bg": "#DBEAFE",
+    "info_text": "#075985",
+    "button_bg": "#003B73",
+}
 
 
 # ==============================
+# CUSTOM CSS
+# ==============================
+
 CUSTOM_CSS = f"""
 <style>
 
@@ -252,7 +235,7 @@ input:focus, textarea:focus {{
     color: #111827 !important;
 }}
 
-/* DROPDOWN POPUP FIX */
+/* DROPDOWN FIX */
 
 ul[role="listbox"] {{
     background-color: #FFFFFF !important;
