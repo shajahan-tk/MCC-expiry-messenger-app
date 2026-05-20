@@ -171,9 +171,6 @@ else:
 
 
 # ==============================
-# CUSTOM CSS
-# ==============================
-
 CUSTOM_CSS = f"""
 <style>
 
@@ -190,12 +187,12 @@ html, body, .stApp {{
 }}
 
 [data-testid="stSidebar"] {{
-    background-color: {THEME["sidebar_bg"]} !important;
+    background-color: #FFFFFF !important;
     border-right: 1px solid #E2E8F0 !important;
 }}
 
 [data-testid="stSidebar"] * {{
-    color: {THEME["text"]} !important;
+    color: #111827 !important;
 }}
 
 [data-testid="stHeader"] {{
@@ -210,18 +207,19 @@ p, label, span, div {{
 .main-title {{
     font-size: 36px;
     font-weight: 800;
-    color: {THEME["primary"]} !important;
+    color: #003B73 !important;
     margin-bottom: 4px;
 }}
 
 .sub-title {{
     font-size: 17px;
-    color: {THEME["muted"]} !important;
+    color: #475569 !important;
     margin-top: 6px;
 }}
 
-/* INPUT BOXES */
-input, textarea, select {{
+/* INPUTS */
+
+input, textarea {{
     background-color: #FFFFFF !important;
     color: #111827 !important;
     border-radius: 10px !important;
@@ -234,12 +232,14 @@ input:focus, textarea:focus {{
     box-shadow: 0 0 0 1px #003B73 !important;
 }}
 
-/* SELECT DROPDOWN MAIN BOX */
+/* SELECT BOX */
+
 [data-baseweb="select"] > div {{
     background-color: #FFFFFF !important;
     color: #111827 !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 10px !important;
+    min-height: 44px !important;
     box-shadow: none !important;
 }}
 
@@ -248,49 +248,59 @@ input:focus, textarea:focus {{
 }}
 
 [data-baseweb="select"] svg {{
-    color: #111827 !important;
     fill: #111827 !important;
+    color: #111827 !important;
 }}
 
-/* SELECT DROPDOWN MENU */
-div[role="listbox"] {{
+/* DROPDOWN POPUP FIX */
+
+ul[role="listbox"] {{
     background-color: #FFFFFF !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 10px !important;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12) !important;
+    padding: 6px !important;
 }}
 
-div[role="option"] {{
+ul[role="listbox"] li {{
     background-color: #FFFFFF !important;
     color: #111827 !important;
+    border-radius: 8px !important;
 }}
 
-div[role="option"] * {{
+ul[role="listbox"] li * {{
     color: #111827 !important;
 }}
 
-div[role="option"]:hover {{
-    background-color: #E8F2FF !important;
-    color: #003B73 !important;
-}}
-
-div[role="option"][aria-selected="true"] {{
+ul[role="listbox"] li:hover {{
     background-color: #DBEAFE !important;
     color: #003B73 !important;
 }}
 
-/* PASSWORD EYE AREA */
-[data-testid="stTextInput"] button {{
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+[data-baseweb="popover"] {{
+    background-color: #FFFFFF !important;
 }}
 
-[data-testid="stTextArea"] textarea {{
-    min-height: 170px !important;
+[data-baseweb="menu"] {{
+    background-color: #FFFFFF !important;
+    border-radius: 10px !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+}}
+
+[data-baseweb="menu"] * {{
+    color: #111827 !important;
+}}
+
+[data-baseweb="menu"] li {{
+    background-color: #FFFFFF !important;
+}}
+
+[data-baseweb="menu"] li:hover {{
+    background-color: #DBEAFE !important;
 }}
 
 /* FILE UPLOADER */
+
 [data-testid="stFileUploader"] section {{
     background-color: #FFFFFF !important;
     border: 1px dashed #CBD5E1 !important;
@@ -315,11 +325,11 @@ div[role="option"][aria-selected="true"] {{
 }}
 
 /* ALERT */
+
 div[data-testid="stAlert"] {{
     background-color: #DBEAFE !important;
-    color: #075985 !important;
-    border-radius: 12px !important;
     border: 1px solid #BFDBFE !important;
+    border-radius: 12px !important;
 }}
 
 div[data-testid="stAlert"] * {{
@@ -327,6 +337,7 @@ div[data-testid="stAlert"] * {{
 }}
 
 /* BUTTONS */
+
 .stButton button,
 .stDownloadButton button {{
     border-radius: 10px !important;
@@ -337,15 +348,16 @@ div[data-testid="stAlert"] * {{
 
 .stButton button[kind="primary"] {{
     background-color: #003B73 !important;
-    color: white !important;
+    color: #FFFFFF !important;
     border: none !important;
 }}
 
 .stButton button[kind="primary"] * {{
-    color: white !important;
+    color: #FFFFFF !important;
 }}
 
-/* METRICS AND TABLES */
+/* METRICS */
+
 [data-testid="stMetric"] {{
     background-color: #FFFFFF !important;
     border: 1px solid #E2E8F0 !important;
@@ -357,11 +369,15 @@ div[data-testid="stAlert"] * {{
     color: #111827 !important;
 }}
 
+/* DATAFRAME */
+
 [data-testid="stDataFrame"] {{
     background-color: #FFFFFF !important;
     border-radius: 12px !important;
     border: 1px solid #E2E8F0 !important;
 }}
+
+/* WARNING BOX */
 
 .warning-box {{
     background: #FFF7E6 !important;
