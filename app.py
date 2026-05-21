@@ -75,21 +75,21 @@ MESSAGE_TYPES = {
     ),
     },
     "Workmensation Expiry": {
-        "document": "Workmensation",
-        "title": "MCC Workmensation Expiry Messenger",
-        "subject": "Workmensation Expiry Soon - Renewal Required",
-        "details_title": "Workmensation Details",
-        "required_columns": {
-            "policy no": "Policy No",
-            "company name": "Company Name",
-            "supplier name": "Supplier Name",
-            "visa sponsor": "Visa Sponsor",
-            "email": "Email",
-        },
-        "message": (
-            "This is to inform you that your Workmensation policy is going to expire soon. "
-            "Kindly renew and update the valid copy at the earliest."
-        ),
+    "document": "Workmensation",
+    "title": "MCC Workmensation Expiry Messenger",
+    "subject": "Workmensation Expiry Soon - Renewal Required",
+    "details_title": "Workmensation Details",
+
+    "required_columns": {
+        "supplier name": "Supplier Name",
+        "visa sponsor": "Visa Sponsor",
+        "email": "Email",
+    },
+
+    "message": (
+        "This is to inform you that your Workmensation policy is going to expire soon. "
+        "Kindly renew and update the valid copy at the earliest."
+    ),
     },
 }
 
