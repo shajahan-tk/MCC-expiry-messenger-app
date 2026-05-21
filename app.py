@@ -429,7 +429,41 @@ div[data-testid="stAlert"] * {
 hr {
     border-color: #E2E8F0 !important;
 }
+/* CUSTOM LIGHT TABLE */
 
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #FFFFFF;
+    border: 1px solid #D6DEE8;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.custom-table th {
+    background: #E5E7EB;
+    color: #111827;
+    font-weight: 700;
+    padding: 12px;
+    border: 1px solid #D1D5DB;
+    text-align: left;
+}
+
+.custom-table td {
+    background: #FFFFFF;
+    color: #111827;
+    padding: 10px 12px;
+    border: 1px solid #E5E7EB;
+}
+
+.custom-table tr:nth-child(even) td {
+    background: #F9FAFB;
+}
+
+.custom-table tr:hover td {
+    background: #EEF4FF;
+}
 </style>
 """
 
@@ -655,11 +689,13 @@ else:
 
 st.subheader("Data Preview")
 
-st.dataframe(
-    clean_df[list(REQUIRED_COLUMNS.keys())],
-    use_container_width=True,
+preview_html = clean_df[list(REQUIRED_COLUMNS.keys())].to_html(
+    index=False,
+    escape=False,
+    classes="custom-table"
 )
 
+st.markdown(preview_html, unsafe_allow_html=True)
 st.subheader("Email Preview")
 
 email_options = list(clean_df["email"].dropna().unique())
