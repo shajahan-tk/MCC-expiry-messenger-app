@@ -279,41 +279,49 @@ div[data-testid="stAlert"] * {
     overflow: hidden !important;
 }
 
-/* NORMAL BUTTONS */
+/* BUTTONS */
 
 .stButton button,
 .stDownloadButton button {
+    width: 100% !important;
+
+    background: #003B73 !important;
+    color: #FFFFFF !important;
+
+    border: none !important;
     border-radius: 10px !important;
+
+    padding: 12px 18px !important;
+
+    font-size: 16px !important;
     font-weight: 700 !important;
-    border: 1px solid #D6DEE8 !important;
+
     box-shadow: none !important;
     transition: none !important;
 }
 
-/* PRIMARY BUTTON */
+/* BUTTON TEXT FIX */
 
-.stButton button[kind="primary"] {
-    background-color: #003B73 !important;
+.stButton button p,
+.stButton button span,
+.stButton button div,
+.stDownloadButton button p,
+.stDownloadButton button span,
+.stDownloadButton button div {
     color: #FFFFFF !important;
-    border: none !important;
-}
-
-/* PRIMARY BUTTON TEXT */
-
-.stButton button[kind="primary"] p,
-.stButton button[kind="primary"] span,
-.stButton button[kind="primary"] div {
-    color: #FFFFFF !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* REMOVE HOVER EFFECT */
 
 .stButton button:hover,
-.stButton button[kind="primary"]:hover,
 .stDownloadButton button:hover {
-    background-color: #003B73 !important;
+    background: #003B73 !important;
     color: #FFFFFF !important;
+
     border: none !important;
+
     transform: none !important;
     box-shadow: none !important;
 }
@@ -323,9 +331,29 @@ div[data-testid="stAlert"] * {
 .stButton button:hover p,
 .stButton button:hover span,
 .stButton button:hover div,
-.stButton button[kind="primary"]:hover p,
-.stButton button[kind="primary"]:hover span,
-.stButton button[kind="primary"]:hover div {
+.stDownloadButton button:hover p,
+.stDownloadButton button:hover span,
+.stDownloadButton button:hover div {
+    color: #FFFFFF !important;
+}
+
+/* REMOVE ACTIVE CLICK BLACK EFFECT */
+
+.stButton button:active,
+.stButton button:focus,
+.stDownloadButton button:active,
+.stDownloadButton button:focus {
+    background: #003B73 !important;
+    color: #FFFFFF !important;
+
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* PRIMARY BUTTON */
+
+.stButton button[kind="primary"] {
+    background: #003B73 !important;
     color: #FFFFFF !important;
 }
 
