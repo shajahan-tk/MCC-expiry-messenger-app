@@ -518,6 +518,8 @@ def clean_data(df, required_columns):
 
 def build_email_body(group, company_name, message_config, required_columns, custom_message):
     supplier_names = group["supplier name"].dropna().unique()
+    if message_config["document"] in ["Workmensation", "Trade Licence"]:
+    group = group.drop_duplicates(subset=["supplier name", "visa sponsor"])
     supplier_text = ", ".join([str(x) for x in supplier_names])
 
     clean_message = escape(custom_message).replace("\n", "<br>")
