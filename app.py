@@ -10,10 +10,6 @@ import pandas as pd
 import streamlit as st
 
 
-# ==============================
-# PAGE CONFIG
-# ==============================
-
 st.set_page_config(
     page_title="MCC Expiry Messenger",
     page_icon="📨",
@@ -21,31 +17,9 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.markdown(
-    """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-
-    [data-testid="stToolbar"],
-    [data-testid="stDecoration"],
-    [data-testid="stStatusWidget"],
-    button[kind="header"] {
-        display: none !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
 SMTP_HOST = "smtp.office365.com"
 SMTP_PORT = 587
 
-
-# ==============================
-# MESSAGE TYPES
-# ==============================
 
 MESSAGE_TYPES = {
     "Emirates ID Expiry": {
@@ -120,10 +94,6 @@ MESSAGE_TYPES = {
 }
 
 
-# ==============================
-# SIDEBAR
-# ==============================
-
 with st.sidebar:
     st.header("Message Type")
 
@@ -139,412 +109,224 @@ with st.sidebar:
     st.divider()
 
 
-# ==============================
-# THEME
-# ==============================
-
-THEME = {
-    "app_bg": "#F3F6FA",
-    "sidebar_bg": "#FFFFFF",
-    "card_bg": "#FFFFFF",
-    "text": "#111827",
-    "muted": "#475569",
-    "primary": "#003B73",
-    "border": "#CBD5E1",
-    "input_bg": "#FFFFFF",
-    "input_text": "#111827",
-    "info_bg": "#DBEAFE",
-    "info_text": "#075985",
-    "button_bg": "#003B73",
-}
-
-
-# ==============================
-# CUSTOM CSS
-# ==============================
-
-CUSTOM_CSS = f"""
+CUSTOM_CSS = """
 <style>
 
-/* HIDE STREAMLIT DEFAULT ITEMS */
-
-#MainMenu {{
-    visibility: hidden;
-}}
-
-footer {{
-    visibility: hidden;
-}}
-
-header {{
-    visibility: hidden;
-}}
-
+/* HIDE STREAMLIT DEFAULT UI */
+#MainMenu,
+footer,
+header,
 [data-testid="stToolbar"],
 [data-testid="stDecoration"],
 [data-testid="stStatusWidget"],
 button[kind="header"],
-[data-testid="collapsedControl"] {{
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapseButton"] {
     display: none !important;
-}}
-
+    visibility: hidden !important;
+}
 
 /* APP BACKGROUND */
-
-html, body, .stApp {{
+html, body, .stApp {
     background-color: #F3F6FA !important;
     color: #111827 !important;
-}}
-
+}
 
 /* MAIN CONTAINER */
-
-.main .block-container {{
+.main .block-container {
     max-width: 1250px;
     padding-top: 2rem;
     padding-left: 3rem;
     padding-right: 3rem;
-    padding-bottom: 80px;
-}}
-
+    padding-bottom: 90px;
+}
 
 /* SIDEBAR */
-
-[data-testid="stSidebar"] {{
+[data-testid="stSidebar"] {
     background-color: #FFFFFF !important;
     border-right: 1px solid #E2E8F0 !important;
-}}
+}
 
-[data-testid="stSidebar"] * {{
+[data-testid="stSidebar"] * {
     color: #111827 !important;
-}}
-
+}
 
 /* TITLES */
-
-.main-title {{
+.main-title {
     font-size: 36px;
     font-weight: 800;
     color: #003B73 !important;
     margin-bottom: 4px;
-}}
+}
 
-.sub-title {{
+.sub-title {
     font-size: 17px;
     color: #475569 !important;
     margin-top: 6px;
-}}
+}
 
+/* TEXT */
+h1, h2, h3, h4, h5, h6, p, label, span {
+    color: #111827 !important;
+}
 
-/* TEXT INPUTS */
-
+/* INPUTS */
 .stTextInput input,
-.stTextArea textarea {{
+.stTextArea textarea {
     background: #FFFFFF !important;
     color: #111827 !important;
-
     border: 1px solid #D6DEE8 !important;
     border-radius: 10px !important;
-
     box-shadow: none !important;
-}}
+}
 
 .stTextInput input:focus,
-.stTextArea textarea:focus {{
+.stTextArea textarea:focus {
     border: 1px solid #AAB7C7 !important;
     box-shadow: none !important;
-}}
+}
 
+/* PASSWORD EYE BUTTON */
+[data-testid="stTextInput"] button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
 /* SELECT BOX */
-
-[data-baseweb="select"] > div {{
+[data-baseweb="select"] > div {
     background: #FFFFFF !important;
     border: 1px solid #D6DEE8 !important;
-
     border-radius: 10px !important;
     min-height: 44px !important;
-
     box-shadow: none !important;
-}}
+}
 
-[data-baseweb="select"] span {{
+[data-baseweb="select"] span {
     color: #111827 !important;
     font-weight: 500 !important;
-}}
+}
 
-[data-baseweb="select"] svg {{
+[data-baseweb="select"] svg {
     color: #111827 !important;
     fill: #111827 !important;
-}}
+}
 
-
-/* DROPDOWN MENU */
-
-div[role="listbox"] {{
+/* DROPDOWN */
+div[role="listbox"],
+[data-baseweb="menu"] {
     background: #FFFFFF !important;
-
     border: 1px solid #D6DEE8 !important;
     border-radius: 10px !important;
-
     box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
 
-    padding: 4px !important;
-}}
-
-
-/* DROPDOWN OPTIONS */
-
-div[role="option"] {{
+div[role="option"] {
     background: #FFFFFF !important;
     color: #111827 !important;
-
     border-radius: 8px !important;
+}
 
-    padding: 10px 12px !important;
-}}
-
-
-/* DROPDOWN HOVER */
-
-div[role="option"]:hover {{
+div[role="option"]:hover {
     background: #EEF4FF !important;
     color: #003B73 !important;
-}}
-
-
-/* SELECTED OPTION */
-
-div[aria-selected="true"] {{
-    background: #DBEAFE !important;
-    color: #003B73 !important;
-}}
-
-
-/* REMOVE BLACK DROPDOWN */
-
-[data-baseweb="popover"] {{
-    background: transparent !important;
-}}
-
-[data-baseweb="menu"] {{
-    background: #FFFFFF !important;
-}}
-
+}
 
 /* FILE UPLOADER */
-
-[data-testid="stFileUploader"] section {{
+[data-testid="stFileUploader"] section {
     background-color: #FFFFFF !important;
-
     border: 1px dashed #CBD5E1 !important;
     border-radius: 16px !important;
-
     padding: 1rem !important;
-}}
+}
 
-[data-testid="stFileUploader"] section * {{
-    color: #111827 !important;
-}}
-
-
-/* UPLOAD BUTTON */
-
-[data-testid="stFileUploader"] button {{
+[data-testid="stFileUploader"] button {
     background: #003B73 !important;
     color: #FFFFFF !important;
-
     border: none !important;
     border-radius: 10px !important;
-
     font-weight: 700 !important;
-}}
+}
 
-[data-testid="stFileUploader"] button * {{
+[data-testid="stFileUploader"] button * {
     color: #FFFFFF !important;
-}}
+}
 
-
-/* NORMAL BUTTONS */
-
-.stButton button,
-.stDownloadButton button {{
-    border-radius: 10px !important;
-
-    font-weight: 700 !important;
-
-    border: 1px solid #D6DEE8 !important;
-
-    box-shadow: none !important;
-}}
-
-
-/* PRIMARY BUTTON */
-
-.stButton button[kind="primary"] {{
-    background-color: #003B73 !important;
-    color: #FFFFFF !important;
-
-    border: none !important;
-}}
-
-.stButton button[kind="primary"] * {{
-    color: #FFFFFF !important;
-}}
-
-
-/* ALERTS */
-
-div[data-testid="stAlert"] {{
+/* ALERT */
+div[data-testid="stAlert"] {
     background-color: #DBEAFE !important;
-
     border: 1px solid #BFDBFE !important;
     border-radius: 12px !important;
-}}
+}
 
-div[data-testid="stAlert"] * {{
+div[data-testid="stAlert"] * {
     color: #075985 !important;
-}}
+}
 
-
-/* METRICS */
-
-[data-testid="stMetric"] {{
+/* METRIC CARDS */
+[data-testid="stMetric"] {
     background-color: #FFFFFF !important;
-
     border: 1px solid #E2E8F0 !important;
     border-radius: 16px !important;
-
     padding: 16px !important;
-}}
+}
 
-[data-testid="stMetric"] * {{
-    color: #111827 !important;
-}}
-
-
-/* DATAFRAME FULL LIGHT MODE FIX */
-
-[data-testid="stDataFrame"] {{
-    background: #FFFFFF !important;
-    border: 1px solid #E2E8F0 !important;
+/* DATAFRAME */
+[data-testid="stDataFrame"] {
+    background-color: #FFFFFF !important;
     border-radius: 12px !important;
+    border: 1px solid #E2E8F0 !important;
     overflow: hidden !important;
-}}
+}
 
-/* TABLE HEADER */
-
-[data-testid="stDataFrame"] thead tr th {{
-    background: #F8FAFC !important;
-    color: #111827 !important;
-
-    border-bottom: 1px solid #E2E8F0 !important;
-
+/* BUTTONS */
+.stButton button,
+.stDownloadButton button {
+    border-radius: 10px !important;
     font-weight: 700 !important;
-}}
+    border: 1px solid #D6DEE8 !important;
+    box-shadow: none !important;
+}
 
-/* TABLE ROWS */
-
-[data-testid="stDataFrame"] tbody tr {{
-    background: #FFFFFF !important;
-}}
-
-/* TABLE CELLS */
-
-[data-testid="stDataFrame"] td {{
-    background: #FFFFFF !important;
-    color: #111827 !important;
-
-    border-bottom: 1px solid #F1F5F9 !important;
-}}
-
-/* ROW HOVER */
-
-[data-testid="stDataFrame"] tbody tr:hover td {{
-    background: #F8FBFF !important;
-}}
-
-/* REMOVE BLACK GRID */
-
-.glideDataEditor,
-.stDataFrameGlideDataEditor,
-[data-testid="stDataFrame"] div {{
-    background-color: #FFFFFF !important;
-    color: #111827 !important;
-}}
-
-/* FIX INDEX COLUMN */
-
-[data-testid="stDataFrame"] div[role="gridcell"] {{
-    background-color: #FFFFFF !important;
-    color: #111827 !important;
-}}
-
-/* REMOVE DARK HEADER */
-
-[data-testid="stDataFrame"] div[role="columnheader"] {{
-    background-color: #F8FAFC !important;
-    color: #111827 !important;
-}}
+.stButton button[kind="primary"] {
+    background-color: #003B73 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
 
 /* WARNING BOX */
-
-.warning-box {{
+.warning-box {
     background: #FFF7E6 !important;
-
     border-left: 5px solid #F59E0B !important;
-
     padding: 14px 18px !important;
-
     border-radius: 10px !important;
-
     color: #663C00 !important;
-
     font-weight: 600 !important;
-}}
-
-.warning-box * {{
-    color: #663C00 !important;
-}}
-
+}
 
 /* FOOTER */
-
-.custom-footer {{
+.custom-footer {
     position: fixed;
-
     bottom: 0;
     left: 0;
-
     width: 100%;
-
     background: #FFFFFF;
-
     border-top: 1px solid #E2E8F0;
-
     padding: 10px 20px;
-
     text-align: center;
-
     z-index: 999999;
-
     font-size: 14px;
-
     color: #475569 !important;
-
     font-weight: 500;
-}}
+}
 
-.custom-footer strong {{
+.custom-footer strong {
     color: #003B73 !important;
-}}
+}
 
-
-/* HR */
-
-hr {{
+hr {
     border-color: #E2E8F0 !important;
-}}
+}
 
 </style>
 """
@@ -552,9 +334,18 @@ hr {{
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 
-# ==============================
-# FUNCTIONS
-# ==============================
+def show_footer():
+    st.markdown(
+        """
+        <div class="custom-footer">
+            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
+            &nbsp; | &nbsp;
+            Developed by <strong>Mr. Shajahan Tk</strong>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 def normalize_excel(df):
     df = df.copy()
@@ -611,7 +402,6 @@ def build_email_body(group, company_name, message_config, required_columns, cust
     body = f"""
     <html>
     <body style="font-family:Arial,sans-serif;font-size:14px;color:#222;">
-
         Dear Supplier,<br><br>
 
         {clean_message}<br><br>
@@ -630,7 +420,6 @@ def build_email_body(group, company_name, message_config, required_columns, cust
         <br><br>
         Regards,<br>
         <b>{escape(company_name)}</b>
-
     </body>
     </html>
     """
@@ -653,10 +442,6 @@ def send_email(sender_email, app_password, to_email, subject, body_html, sender_
         server.sendmail(sender_email, to_email, msg.as_string())
 
 
-# ==============================
-# EMAIL SETTINGS
-# ==============================
-
 with st.sidebar:
     st.header("Email Settings")
 
@@ -666,9 +451,9 @@ with st.sidebar:
     )
 
     app_password = st.text_input(
-    "Microsoft 365 App Password",
-    value="mrgdcmnfrxgfgzzz",
-    type="password",
+        "Microsoft 365 App Password",
+        value="YOUR_MICROSOFT_APP_PASSWORD_HERE",
+        type="password",
     )
 
     sender_name = st.text_input(
@@ -693,13 +478,8 @@ with st.sidebar:
     )
 
     st.divider()
+    st.caption("Tip: password is hidden on screen.")
 
-    st.caption("Tip: keep the password in environment variables, not inside the code.")
-
-
-# ==============================
-# LOGO + HEADER
-# ==============================
 
 top_col1, top_col2 = st.columns([1, 9])
 
@@ -722,11 +502,6 @@ with top_col2:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-
-# ==============================
-# FILE UPLOAD
-# ==============================
-
 uploaded_file = st.file_uploader(
     f"Upload your {DOCUMENT_NAME} Excel file",
     type=["xlsx", "xls"],
@@ -737,22 +512,8 @@ if uploaded_file is None:
         "Upload an Excel file with these columns: "
         + ", ".join(REQUIRED_COLUMNS.values())
     )
-    st.markdown(
-        """
-        <div class="custom-footer">
-            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-            &nbsp; | &nbsp;
-            Developed by <strong>Mr. Shajahan Tk</strong>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    show_footer()
     st.stop()
-
-
-# ==============================
-# READ EXCEL
-# ==============================
 
 try:
     raw_df = pd.read_excel(uploaded_file)
@@ -760,67 +521,24 @@ try:
 
 except Exception as exc:
     st.error(f"Could not read Excel file: {exc}")
-    st.markdown(
-        """
-        <div class="custom-footer">
-            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-            &nbsp; | &nbsp;
-            Developed by <strong>Mr. Shajahan Tk</strong>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    show_footer()
     st.stop()
-
-
-# ==============================
-# VALIDATE
-# ==============================
 
 missing_cols = validate_columns(df, REQUIRED_COLUMNS)
 
 if missing_cols:
     missing_names = [REQUIRED_COLUMNS[col] for col in missing_cols]
-
     st.error("Missing required columns: " + ", ".join(missing_names))
     st.write("Columns found:", list(df.columns))
-    st.markdown(
-        """
-        <div class="custom-footer">
-            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-            &nbsp; | &nbsp;
-            Developed by <strong>Mr. Shajahan Tk</strong>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    show_footer()
     st.stop()
-
-
-# ==============================
-# CLEAN DATA
-# ==============================
 
 clean_df = clean_data(df, REQUIRED_COLUMNS)
 
 if clean_df.empty:
     st.warning("No valid rows found after cleaning email column.")
-    st.markdown(
-        """
-        <div class="custom-footer">
-            <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-            &nbsp; | &nbsp;
-            Developed by <strong>Mr. Shajahan Tk</strong>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    show_footer()
     st.stop()
-
-
-# ==============================
-# METRICS
-# ==============================
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -833,22 +551,12 @@ if "visa sponsor" in clean_df.columns:
 else:
     col4.metric("Message Type", DOCUMENT_NAME)
 
-
-# ==============================
-# DATA PREVIEW
-# ==============================
-
 st.subheader("Data Preview")
 
 st.dataframe(
     clean_df[list(REQUIRED_COLUMNS.keys())],
     use_container_width=True,
 )
-
-
-# ==============================
-# EMAIL PREVIEW
-# ==============================
 
 st.subheader("Email Preview")
 
@@ -874,11 +582,6 @@ st.components.v1.html(
     height=520,
     scrolling=True,
 )
-
-
-# ==============================
-# SEND EMAILS
-# ==============================
 
 st.subheader("Send Emails")
 
@@ -906,11 +609,6 @@ with send_col2:
         type="primary",
         use_container_width=True,
     )
-
-
-# ==============================
-# SEND LOGIC
-# ==============================
 
 if preview_only or send_now:
     if not sender_email or not app_password:
@@ -993,18 +691,4 @@ if preview_only or send_now:
             use_container_width=True,
         )
 
-
-# ==============================
-# FOOTER
-# ==============================
-
-st.markdown(
-    """
-    <div class="custom-footer">
-        <strong>MCC ON DEMAND LABORS SUPPLY L.L.C</strong>
-        &nbsp; | &nbsp;
-        Developed by <strong>Mr. Shajahan Tk</strong>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+show_footer()
