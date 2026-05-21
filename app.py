@@ -423,15 +423,69 @@ div[data-testid="stAlert"] * {{
 }}
 
 
-/* DATAFRAME */
+/* DATAFRAME FULL LIGHT MODE FIX */
 
 [data-testid="stDataFrame"] {{
-    background-color: #FFFFFF !important;
-
-    border-radius: 12px !important;
+    background: #FFFFFF !important;
     border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
 }}
 
+/* TABLE HEADER */
+
+[data-testid="stDataFrame"] thead tr th {{
+    background: #F8FAFC !important;
+    color: #111827 !important;
+
+    border-bottom: 1px solid #E2E8F0 !important;
+
+    font-weight: 700 !important;
+}}
+
+/* TABLE ROWS */
+
+[data-testid="stDataFrame"] tbody tr {{
+    background: #FFFFFF !important;
+}}
+
+/* TABLE CELLS */
+
+[data-testid="stDataFrame"] td {{
+    background: #FFFFFF !important;
+    color: #111827 !important;
+
+    border-bottom: 1px solid #F1F5F9 !important;
+}}
+
+/* ROW HOVER */
+
+[data-testid="stDataFrame"] tbody tr:hover td {{
+    background: #F8FBFF !important;
+}}
+
+/* REMOVE BLACK GRID */
+
+.glideDataEditor,
+.stDataFrameGlideDataEditor,
+[data-testid="stDataFrame"] div {{
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+}}
+
+/* FIX INDEX COLUMN */
+
+[data-testid="stDataFrame"] div[role="gridcell"] {{
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+}}
+
+/* REMOVE DARK HEADER */
+
+[data-testid="stDataFrame"] div[role="columnheader"] {{
+    background-color: #F8FAFC !important;
+    color: #111827 !important;
+}}
 
 /* WARNING BOX */
 
