@@ -193,7 +193,12 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     box-shadow: none !important;
 }
 
-/* SELECT BOX */
+/* SELECT BOX FIX */
+
+[data-baseweb="select"] {
+    background: #FFFFFF !important;
+    color: #111827 !important;
+}
 
 [data-baseweb="select"] > div {
     background: #FFFFFF !important;
@@ -201,58 +206,67 @@ h1, h2, h3, h4, h5, h6, p, label, span {
     border-radius: 10px !important;
     min-height: 44px !important;
     box-shadow: none !important;
-}
-
-/* SELECTED TEXT */
-
-[data-baseweb="select"] span {
     color: #111827 !important;
-    font-weight: 500 !important;
-    opacity: 1 !important;
 }
 
-/* INPUT TEXT INSIDE SELECT */
-
+/* SELECTED VALUE TEXT FIX */
+[data-baseweb="select"] div,
+[data-baseweb="select"] span,
 [data-baseweb="select"] input {
     color: #111827 !important;
     -webkit-text-fill-color: #111827 !important;
+    opacity: 1 !important;
 }
 
-/* DROPDOWN ICON */
+/* PLACEHOLDER ALSO BLACK */
+[data-baseweb="select"] input::placeholder {
+    color: #111827 !important;
+    opacity: 1 !important;
+}
 
+/* ARROW ICON */
 [data-baseweb="select"] svg {
     color: #111827 !important;
     fill: #111827 !important;
 }
 
-/* DROPDOWN MENU */
-
+/* DROPDOWN POPUP */
+[data-baseweb="popover"],
+[data-baseweb="menu"],
+ul[role="listbox"],
 div[role="listbox"] {
     background: #FFFFFF !important;
     border: 1px solid #D6DEE8 !important;
     border-radius: 10px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
-    padding: 4px !important;
 }
 
-/* OPTIONS */
-
+/* DROPDOWN OPTIONS */
+li[role="option"],
 div[role="option"] {
     background: #FFFFFF !important;
     color: #111827 !important;
-    border-radius: 8px !important;
-    padding: 10px 12px !important;
+    -webkit-text-fill-color: #111827 !important;
+    opacity: 1 !important;
 }
 
-/* OPTION HOVER */
+/* OPTION TEXT */
+li[role="option"] *,
+div[role="option"] * {
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
+    opacity: 1 !important;
+}
 
+/* HOVER */
+li[role="option"]:hover,
 div[role="option"]:hover {
     background: #EEF4FF !important;
     color: #003B73 !important;
 }
 
 /* SELECTED OPTION */
-
+li[aria-selected="true"],
 div[aria-selected="true"] {
     background: #DBEAFE !important;
     color: #003B73 !important;
