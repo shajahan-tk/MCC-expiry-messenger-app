@@ -58,21 +58,21 @@ MESSAGE_TYPES = {
         ),
     },
     "Trade Licence Expiry": {
-        "document": "Trade Licence",
-        "title": "MCC Trade Licence Expiry Messenger",
-        "subject": "Trade Licence Expiry Soon - Renewal Required",
-        "details_title": "Trade Licence Details",
-        "required_columns": {
-            "trade licence no": "Trade Licence No",
-            "company name": "Company Name",
-            "supplier name": "Supplier Name",
-            "visa sponsor": "Visa Sponsor",
-            "email": "Email",
-        },
-        "message": (
-            "This is to inform you that your Trade Licence is going to expire soon. "
-            "Kindly renew and update the valid copy at the earliest."
-        ),
+    "document": "Trade Licence",
+    "title": "MCC Trade Licence Expiry Messenger",
+    "subject": "Trade Licence Expiry Soon - Renewal Required",
+    "details_title": "Trade Licence Details",
+
+    "required_columns": {
+        "supplier name": "Supplier Name",
+        "visa sponsor": "Visa Sponsor",
+        "email": "Email",
+    },
+
+    "message": (
+        "This is to inform you that your Trade Licence is going to expire soon. "
+        "Kindly renew and update the valid copy at the earliest."
+    ),
     },
     "Workmensation Expiry": {
         "document": "Workmensation",
