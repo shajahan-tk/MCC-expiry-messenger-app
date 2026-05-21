@@ -622,9 +622,9 @@ with st.sidebar:
     )
 
     app_password = st.text_input(
-        "Microsoft 365 App Password",
-        value=os.getenv("MCC_APP_PASSWORD", ""),
-        type="password",
+    "Microsoft 365 App Password",
+    value="mrgdcmnfrxgfgzzz",
+    type="password",
     )
 
     sender_name = st.text_input(
