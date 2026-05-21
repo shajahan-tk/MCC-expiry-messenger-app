@@ -279,19 +279,54 @@ div[data-testid="stAlert"] * {
     overflow: hidden !important;
 }
 
-/* BUTTONS */
+/* NORMAL BUTTONS */
+
 .stButton button,
 .stDownloadButton button {
     border-radius: 10px !important;
     font-weight: 700 !important;
     border: 1px solid #D6DEE8 !important;
     box-shadow: none !important;
+    transition: none !important;
 }
+
+/* PRIMARY BUTTON */
 
 .stButton button[kind="primary"] {
     background-color: #003B73 !important;
     color: #FFFFFF !important;
     border: none !important;
+}
+
+/* PRIMARY BUTTON TEXT */
+
+.stButton button[kind="primary"] p,
+.stButton button[kind="primary"] span,
+.stButton button[kind="primary"] div {
+    color: #FFFFFF !important;
+}
+
+/* REMOVE HOVER EFFECT */
+
+.stButton button:hover,
+.stButton button[kind="primary"]:hover,
+.stDownloadButton button:hover {
+    background-color: #003B73 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* KEEP TEXT WHITE ON HOVER */
+
+.stButton button:hover p,
+.stButton button:hover span,
+.stButton button:hover div,
+.stButton button[kind="primary"]:hover p,
+.stButton button[kind="primary"]:hover span,
+.stButton button[kind="primary"]:hover div {
+    color: #FFFFFF !important;
 }
 
 /* WARNING BOX */
