@@ -464,6 +464,16 @@ hr {
 .custom-table tr:hover td {
     background: #EEF4FF;
 }
+/* TABLE CONTAINER */
+
+.table-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 12px;
+    border: 1px solid #D6DEE8;
+    background: #FFFFFF;
+}
+
 </style>
 """
 
@@ -695,7 +705,14 @@ preview_html = clean_df[list(REQUIRED_COLUMNS.keys())].to_html(
     classes="custom-table"
 )
 
-st.markdown(preview_html, unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <div class="table-container">
+        {preview_html}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 st.subheader("Email Preview")
 
 email_options = list(clean_df["email"].dropna().unique())
