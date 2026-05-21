@@ -166,10 +166,45 @@ THEME = {
 CUSTOM_CSS = f"""
 <style>
 
-html, body, .stApp {{
-    background-color: {THEME["app_bg"]} !important;
-    color: {THEME["text"]} !important;
+/* ============================= */
+/* HIDE STREAMLIT DEFAULT UI */
+/* ============================= */
+
+#MainMenu {{
+    visibility: hidden;
 }}
+
+footer {{
+    visibility: hidden;
+}}
+
+header {{
+    visibility: hidden;
+}}
+
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+button[kind="header"],
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {{
+    display: none !important;
+}}
+
+
+/* ============================= */
+/* MAIN APP */
+/* ============================= */
+
+html, body, .stApp {{
+    background-color: #F3F6FA !important;
+    color: #111827 !important;
+}}
+
+
+/* ============================= */
+/* MAIN CONTAINER */
+/* ============================= */
 
 .main .block-container {{
     max-width: 1250px;
@@ -178,6 +213,11 @@ html, body, .stApp {{
     padding-right: 3rem;
     padding-bottom: 80px;
 }}
+
+
+/* ============================= */
+/* SIDEBAR */
+/* ============================= */
 
 [data-testid="stSidebar"] {{
     background-color: #FFFFFF !important;
@@ -188,32 +228,29 @@ html, body, .stApp {{
     color: #111827 !important;
 }}
 
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
+
 [data-testid="stHeader"] {{
     background: transparent !important;
 }}
+
+
+/* ============================= */
+/* TEXT */
+/* ============================= */
 
 h1, h2, h3, h4, h5, h6,
 p, label, span, div {{
     color: #111827 !important;
 }}
 
-/* REMOVE SIDEBAR COLLAPSE BUTTON */
-[data-testid="stSidebarCollapseButton"] {
-    display: none !important;
-}
 
-button[data-testid="stSidebarCollapseButton"] {
-    display: none !important;
-}
-
-[data-testid="collapsedControl"] {
-    display: none !important;
-}
-
-[data-testid="stSidebarCollapseButton"],
-[data-testid="collapsedControl"] {
-    display: none !important;
-}
+/* ============================= */
+/* TITLE */
+/* ============================= */
 
 .main-title {{
     font-size: 36px;
@@ -228,7 +265,13 @@ button[data-testid="stSidebarCollapseButton"] {
     margin-top: 6px;
 }}
 
-input, textarea {{
+
+/* ============================= */
+/* INPUTS */
+/* ============================= */
+
+input,
+textarea {{
     background-color: #FFFFFF !important;
     color: #111827 !important;
     border-radius: 10px !important;
@@ -236,10 +279,16 @@ input, textarea {{
     box-shadow: none !important;
 }}
 
-input:focus, textarea:focus {{
+input:focus,
+textarea:focus {{
     border: 1px solid #003B73 !important;
     box-shadow: 0 0 0 1px #003B73 !important;
 }}
+
+
+/* ============================= */
+/* SELECT BOX */
+/* ============================= */
 
 [data-baseweb="select"] > div {{
     background-color: #FFFFFF !important;
@@ -258,6 +307,11 @@ input:focus, textarea:focus {{
     fill: #111827 !important;
     color: #111827 !important;
 }}
+
+
+/* ============================= */
+/* DROPDOWN */
+/* ============================= */
 
 ul[role="listbox"] {{
     background-color: #FFFFFF !important;
@@ -304,6 +358,11 @@ ul[role="listbox"] li:hover {{
     background-color: #DBEAFE !important;
 }}
 
+
+/* ============================= */
+/* FILE UPLOADER */
+/* ============================= */
+
 [data-testid="stFileUploader"] section {{
     background-color: #FFFFFF !important;
     border: 1px dashed #CBD5E1 !important;
@@ -327,6 +386,11 @@ ul[role="listbox"] li:hover {{
     color: #FFFFFF !important;
 }}
 
+
+/* ============================= */
+/* ALERT */
+/* ============================= */
+
 div[data-testid="stAlert"] {{
     background-color: #DBEAFE !important;
     border: 1px solid #BFDBFE !important;
@@ -336,6 +400,11 @@ div[data-testid="stAlert"] {{
 div[data-testid="stAlert"] * {{
     color: #075985 !important;
 }}
+
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
 
 .stButton button,
 .stDownloadButton button {{
@@ -355,6 +424,11 @@ div[data-testid="stAlert"] * {{
     color: #FFFFFF !important;
 }}
 
+
+/* ============================= */
+/* METRICS */
+/* ============================= */
+
 [data-testid="stMetric"] {{
     background-color: #FFFFFF !important;
     border: 1px solid #E2E8F0 !important;
@@ -366,11 +440,21 @@ div[data-testid="stAlert"] * {{
     color: #111827 !important;
 }}
 
+
+/* ============================= */
+/* DATAFRAME */
+/* ============================= */
+
 [data-testid="stDataFrame"] {{
     background-color: #FFFFFF !important;
     border-radius: 12px !important;
     border: 1px solid #E2E8F0 !important;
 }}
+
+
+/* ============================= */
+/* WARNING BOX */
+/* ============================= */
 
 .warning-box {{
     background: #FFF7E6 !important;
@@ -385,6 +469,11 @@ div[data-testid="stAlert"] * {{
     color: #663C00 !important;
 }}
 
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
 .custom-footer {{
     position: fixed;
     bottom: 0;
@@ -392,7 +481,7 @@ div[data-testid="stAlert"] * {{
     width: 100%;
     background: #FFFFFF;
     border-top: 1px solid #E2E8F0;
-    padding: 10px 20px;
+    padding: 12px 20px;
     text-align: center;
     z-index: 999999;
     font-size: 14px;
@@ -403,6 +492,11 @@ div[data-testid="stAlert"] * {{
 .custom-footer strong {{
     color: #003B73 !important;
 }}
+
+
+/* ============================= */
+/* HR */
+/* ============================= */
 
 hr {{
     border-color: #E2E8F0 !important;
