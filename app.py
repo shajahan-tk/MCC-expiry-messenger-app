@@ -310,12 +310,68 @@ div[data-testid="stAlert"] * {
     padding: 16px !important;
 }
 
-/* DATAFRAME */
+/* DATAFRAME FULL LIGHT GREY UI */
+
 [data-testid="stDataFrame"] {
-    background-color: #FFFFFF !important;
+    background: #F8FAFC !important;
+    border: 1px solid #D6DEE8 !important;
     border-radius: 12px !important;
-    border: 1px solid #E2E8F0 !important;
     overflow: hidden !important;
+}
+
+/* MAIN TABLE AREA */
+
+.glideDataEditor,
+.stDataFrameGlideDataEditor {
+    background: #F8FAFC !important;
+    color: #111827 !important;
+}
+
+/* HEADER */
+
+[data-testid="stDataFrame"] div[role="columnheader"] {
+    background: #E5E7EB !important;
+    color: #111827 !important;
+    font-weight: 700 !important;
+    border-right: 1px solid #D1D5DB !important;
+}
+
+/* TABLE CELLS */
+
+[data-testid="stDataFrame"] div[role="gridcell"] {
+    background: #F9FAFB !important;
+    color: #111827 !important;
+    border-right: 1px solid #E5E7EB !important;
+    border-bottom: 1px solid #E5E7EB !important;
+}
+
+/* ROW HOVER */
+
+[data-testid="stDataFrame"] div[role="gridcell"]:hover {
+    background: #EEF2F7 !important;
+}
+
+/* INDEX COLUMN */
+
+[data-testid="stDataFrame"] div[data-testid="StyledDataFrameResizable"] {
+    background: #E5E7EB !important;
+    color: #111827 !important;
+}
+
+/* SCROLLBAR */
+
+[data-testid="stDataFrame"] ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+[data-testid="stDataFrame"] ::-webkit-scrollbar-track {
+    background: #E5E7EB;
+}
+
+[data-testid="stDataFrame"] ::-webkit-scrollbar-thumb {
+    background: #9CA3AF;
+    border-radius: 10px;
 }
 
 /* BUTTONS */
