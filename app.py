@@ -197,6 +197,24 @@ p, label, span, div {{
     color: #111827 !important;
 }}
 
+/* REMOVE SIDEBAR COLLAPSE BUTTON */
+[data-testid="stSidebarCollapseButton"] {
+    display: none !important;
+}
+
+button[data-testid="stSidebarCollapseButton"] {
+    display: none !important;
+}
+
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+
 .main-title {{
     font-size: 36px;
     font-weight: 800;
