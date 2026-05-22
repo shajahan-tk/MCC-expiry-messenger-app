@@ -598,7 +598,7 @@ with st.sidebar:
 
     app_password = st.text_input(
         "Microsoft 365 App Password",
-        value="YOUR_MICROSOFT_APP_PASSWORD_HERE",
+        value="mrgdcmnfrxgfgzzz",
         type="password",
     )
 
